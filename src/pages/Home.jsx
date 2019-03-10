@@ -1,11 +1,22 @@
-import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button} from 'reactstrap';
 import PropTypes from 'prop-types';
 
 export default class Home extends Component {
 
-  onMakeOlder(){
+  constructor(props) {
+    super(props)
+    this.state = {
+      homeLink: "Changed Link"
+    }
+  }
 
+  handleGreet() {
+    this.props.greet(this.props.age)
+  }
+
+  changeLink() {
+    this.props.changeLink(this.state.homeLink)
   }
 
   render() {
@@ -19,7 +30,8 @@ export default class Home extends Component {
                 <ul>
                   {this.props.user.hobbies.map((hobby, i) => <li key={i}>{hobby}</li>)}
                 </ul>
-                <Button color="primary" onClick={() => {this.onMakeOlder.bind(this)}} >Make me older</Button>{' '}
+                <Button color="primary" onClick={this.handleGreet.bind(this)}>Make me older</Button>{' '}
+                <Button color="primary" onClick={this.changeLink.bind(this)}>Change Header Link</Button>{' '}
               </div>
               <div>{this.props.children}</div>
             </div>
