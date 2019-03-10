@@ -48,6 +48,7 @@ export default class App extends Component {
                   age={this.state.initAge}
                   user={this.state.user}
                   greet={this.onGreet.bind(this)}
+                  initialName={this.state.homeLink}
                   changeLink={this.changeLinkName.bind(this)}
               >
                 <p>I am child</p>

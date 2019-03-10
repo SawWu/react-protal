@@ -7,9 +7,35 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      homeLink: "Changed Link"
+      homeLink: props.initialName
     }
   }
+
+  componentWillMount() {
+    console.log("Component will mount");
+  }
+
+  componentDidMount() {
+    console.log("Component did mount");
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Component should update', nextProps, nextState);
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('Component will update', nextProps, nextState);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('Component did update', prevProps, prevState);
+  }
+
 
   handleGreet() {
     this.props.greet(this.props.age)
@@ -17,6 +43,12 @@ export default class Home extends Component {
 
   changeLink() {
     this.props.changeLink(this.state.homeLink)
+  }
+
+  handleChange(ev){
+    this.setState({
+      homeLink:ev.target.value
+    })
   }
 
   render() {
@@ -31,6 +63,12 @@ export default class Home extends Component {
                   {this.props.user.hobbies.map((hobby, i) => <li key={i}>{hobby}</li>)}
                 </ul>
                 <Button color="primary" onClick={this.handleGreet.bind(this)}>Make me older</Button>{' '}
+                <input
+                    type="text"
+                    defaultValue={this.props.initialName}
+                    value={this.state.initialName}
+                    onChange={this.handleChange.bind(this)}
+                />
                 <Button color="primary" onClick={this.changeLink.bind(this)}>Change Header Link</Button>{' '}
               </div>
               <div>{this.props.children}</div>
@@ -45,5 +83,6 @@ Home.propTypes = {
   name: PropTypes.string,
   age: PropTypes.number,
   user: PropTypes.object,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  initialName: PropTypes.string
 };
