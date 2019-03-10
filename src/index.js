@@ -1,9 +1,8 @@
 import React from 'react';
 import {render} from 'react-dom';
+import 'babel-polyfill'
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'babel-polyfill'
-
 
 render(
     <App/>,
